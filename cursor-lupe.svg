@@ -1,0 +1,14 @@
+/* Lupe als Mauszeiger */
+body{
+  cursor: url("cursor-lupe.svg") 28 28, auto;
+}
+
+/* Damit Links & Buttons nicht wieder zur Hand werden */
+a, button, input, textarea, label {
+  cursor: inherit;
+}
+
+/* Auf Handy/Tablet (Touch) normalen Cursor nutzen */
+@media (pointer: coarse){
+  body{ cursor: auto; }
+}

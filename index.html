@@ -36,10 +36,12 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
-      cursor: url("cursor-lupe.svg") 28 28, auto;
+
+      /* Lupe-Cursor direkt eingebettet (keine extra Datei nötig) */
+      cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3E%3Ccircle%20cx='28'%20cy='28'%20r='16'%20fill='none'%20stroke='%23e5e7eb'%20stroke-width='6'/%3E%3Cline%20x1='40'%20y1='40'%20x2='58'%20y2='58'%20stroke='%23e5e7eb'%20stroke-width='8'%20stroke-linecap='round'/%3E%3Ccircle%20cx='28'%20cy='28'%20r='9'%20fill='none'%20stroke='%2322c55e'%20stroke-width='3'%20opacity='0.9'/%3E%3C/svg%3E") 28 28, auto;
     }
 
-    /* Touch-Geräte: kein Mauszeiger */
+    /* Touch-Geräte: normal (kein Mauszeiger) */
     @media (pointer: coarse){
       body{ cursor: auto; }
     }
@@ -95,7 +97,6 @@
       background: transparent;
       font-size: 0.95rem;
     }
-
     .pill:hover{ border-color: var(--accent); }
 
     .icon-btn{
@@ -136,29 +137,21 @@
     .lead{
       font-size: 1.05rem;
       color: var(--text);
+      margin-top: 0.5rem;
     }
 
     .accent{ color: var(--accent); font-weight: 700; }
 
-    .img-placeholder{
+    /* Echte Bilder/Piktogramme */
+    .icon-image{
       width: 100%;
-      height: min(240px, 52vw);
+      max-width: 240px;
+      display: block;
+      margin: 0.9rem auto 0;
       border-radius: 14px;
-      border: 1px dashed var(--border);
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: var(--muted);
-      margin-top: 0.8rem;
+      border: 1px solid var(--border);
+      background: rgba(148,163,184,0.08);
       padding: 0.75rem;
-      background:
-        repeating-linear-gradient(
-          45deg,
-          rgba(148,163,184,0.12),
-          rgba(148,163,184,0.12) 10px,
-          rgba(2,6,23,0.0) 10px,
-          rgba(2,6,23,0.0) 20px
-        );
     }
 
     .section{
@@ -243,22 +236,18 @@
           von <strong>Fahrraddiebstahl</strong> bis zu <strong>mysteriös verschwundenen Strafzetteln</strong>.
         </p>
 
-        <div class="img-placeholder">
-          Platzhalter für anonymes KI-Bild<br>
-          (Comic-Detektiv, keine echte Person)
-        </div>
+        <img src="icons/detektiv.svg" alt="Detektiv Piktogramm" class="icon-image">
 
         <p class="note">
-         Wir beobachten genau, denken scharf nach und geben niemals auf. Jeder Fall verdient unsere volle Aufmerksamkeit.
+          Wir beobachten genau, denken scharf nach und geben niemals auf.
+          Jeder Fall verdient unsere volle Aufmerksamkeit.
         </p>
       </div>
 
       <div class="card">
         <h2>🔎 Ausrüstung</h2>
         <p>Lupe, Notizbuch, Geheimkarte — und ganz viel Köpfchen!</p>
-        <div class="img-placeholder">
-          Platzhalter: KI-Bild „Detektiv-Ausrüstung“
-        </div>
+        <img src="icons/lupe.svg" alt="Lupe Piktogramm" class="icon-image">
       </div>
     </section>
 
@@ -297,17 +286,17 @@
         <div class="card">
           <h3>„Code-Katze“ 🐾</h3>
           <p>Spezialgebiet: Muster erkennen & lautlos schleichen.</p>
-          <div class="img-placeholder">Platzhalter: anonymes KI-Teammitglied</div>
+          <img src="icons/team.svg" alt="Team Piktogramm" class="icon-image">
         </div>
         <div class="card">
           <h3>„Professor Lupe“ 🔍</h3>
           <p>Spezialgebiet: Beweise sortieren & Notizen führen.</p>
-          <div class="img-placeholder">Platzhalter: anonymes KI-Teammitglied</div>
+          <img src="icons/team.svg" alt="Team Piktogramm" class="icon-image">
         </div>
         <div class="card">
           <h3>„Turbo-Tipp“ ⚡</h3>
           <p>Spezialgebiet: Schnelle Ideen & clevere Abkürzungen.</p>
-          <div class="img-placeholder">Platzhalter: anonymes KI-Teammitglied</div>
+          <img src="icons/team.svg" alt="Team Piktogramm" class="icon-image">
         </div>
       </div>
     </section>
@@ -318,14 +307,17 @@
         <div class="card">
           <h3>„Nebelblick“ 🌫️</h3>
           <p>Unauffällig schauen, ohne aufzufallen.</p>
+          <img src="icons/spion.svg" alt="Spion Piktogramm" class="icon-image">
         </div>
         <div class="card">
           <h3>„Flüsterfunk“ 📡</h3>
           <p>Schickt geheime Nachrichten (nur harmlose!).</p>
+          <img src="icons/spion.svg" alt="Spion Piktogramm" class="icon-image">
         </div>
         <div class="card">
           <h3>„Schuhabdruck“ 👟</h3>
           <p>Findet Spuren am Boden und zeigt die Richtung.</p>
+          <img src="icons/spion.svg" alt="Spion Piktogramm" class="icon-image">
         </div>
       </div>
     </section>

@@ -12,56 +12,59 @@
 
     :root{
       color-scheme: dark;
-      --bg: #0f172a;
-      --panel: #020617;
+      --bg: #0b1224;
+      --panel: #070c1a;
       --text: #e5e7eb;
-      --muted: #94a3b8;
+      --muted: #9aa7bd;
       --accent: #22c55e;
-      --border: #334155;
+      --border: rgba(148,163,184,0.22);
+      --glow: rgba(34,197,94,0.12);
     }
 
     body.light{
       color-scheme: light;
-      --bg: #f8fafc;
-      --panel: #e5e7eb;
-      --text: #0f172a;
+      --bg: #f7fafc;
+      --panel: #ffffff;
+      --text: #0b1224;
       --muted: #334155;
       --accent: #16a34a;
-      --border: #94a3b8;
+      --border: rgba(51,65,85,0.25);
+      --glow: rgba(22,163,74,0.10);
     }
 
     body{
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(34,197,94,0.08), transparent 60%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(148,163,184,0.06), transparent 60%),
+                  var(--bg);
       color: var(--text);
       line-height: 1.5;
 
-      /* Lupe-Cursor direkt eingebettet (keine extra Datei nötig) */
+      /* Lupe-Cursor eingebettet */
       cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3E%3Ccircle%20cx='28'%20cy='28'%20r='16'%20fill='none'%20stroke='%23e5e7eb'%20stroke-width='6'/%3E%3Cline%20x1='40'%20y1='40'%20x2='58'%20y2='58'%20stroke='%23e5e7eb'%20stroke-width='8'%20stroke-linecap='round'/%3E%3Ccircle%20cx='28'%20cy='28'%20r='9'%20fill='none'%20stroke='%2322c55e'%20stroke-width='3'%20opacity='0.9'/%3E%3C/svg%3E") 28 28, auto;
     }
 
-    /* Touch-Geräte: normal (kein Mauszeiger) */
     @media (pointer: coarse){
       body{ cursor: auto; }
     }
 
-    a, button, input, textarea, label { cursor: inherit; color: inherit; }
+    a, button { cursor: inherit; color: inherit; }
 
     header{
-      background: var(--panel);
+      background: rgba(7,12,26,0.85);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
-      padding: 1rem;
+      padding: 0.85rem 1rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
       flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-
-    .logo{
-      font-size: 2.25rem;
-      line-height: 1;
-    }
+    body.light header{ background: rgba(255,255,255,0.8); }
 
     .brand{
       display: flex;
@@ -69,18 +72,9 @@
       gap: 0.75rem;
       min-width: 220px;
     }
-
-    .brand h1{
-      margin: 0;
-      font-size: clamp(1.35rem, 4.5vw, 2rem);
-      letter-spacing: 0.2px;
-    }
-
-    .kicker{
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 0.15rem;
-    }
+    .logo{ font-size: 2rem; line-height: 1; }
+    .kicker{ font-size: 0.85rem; color: var(--muted); margin-bottom: 0.1rem; letter-spacing: 0.2px; }
+    h1{ margin: 0; font-size: clamp(1.35rem, 4.5vw, 1.95rem); letter-spacing: 0.2px; }
 
     nav{
       display: flex;
@@ -92,23 +86,24 @@
     .pill{
       text-decoration: none;
       border: 1px solid var(--border);
-      padding: 0.4rem 0.75rem;
+      padding: 0.38rem 0.7rem;
       border-radius: 999px;
-      background: transparent;
+      background: rgba(148,163,184,0.05);
       font-size: 0.95rem;
     }
-    .pill:hover{ border-color: var(--accent); }
+    .pill:hover{ border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
 
     .icon-btn{
       margin-left: auto;
       border: 1px solid var(--border);
-      background: transparent;
-      padding: 0.4rem 0.7rem;
+      background: rgba(148,163,184,0.05);
+      padding: 0.35rem 0.65rem;
       border-radius: 999px;
       min-height: 44px;
       min-width: 44px;
       font-size: 1rem;
     }
+    .icon-btn:hover{ border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
 
     main{
       max-width: 980px;
@@ -122,80 +117,94 @@
       grid-template-columns: 1fr;
       margin-top: 1rem;
     }
-
     @media (min-width: 860px){
       .hero{ grid-template-columns: 1.2fr 0.8fr; align-items: start; }
     }
 
     .card{
-      background: var(--panel);
+      background: linear-gradient(180deg, rgba(148,163,184,0.06), rgba(148,163,184,0.03));
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background: radial-gradient(600px 200px at 20% 0%, rgba(34,197,94,0.10), transparent 55%);
+      opacity: 0.9;
+    }
+    .card > *{ position: relative; }
+
+    .stamp{
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(229,231,235,0.70);
+      border: 1px solid rgba(229,231,235,0.20);
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      background: rgba(2,6,23,0.35);
+    }
+    body.light .stamp{
+      color: rgba(2,6,23,0.65);
+      border-color: rgba(2,6,23,0.18);
+      background: rgba(255,255,255,0.55);
     }
 
     .lead{
-      font-size: 1.05rem;
-      color: var(--text);
+      font-size: 1.03rem;
       margin-top: 0.5rem;
     }
+    .accent{ color: var(--accent); font-weight: 800; }
 
-    .accent{ color: var(--accent); font-weight: 700; }
-
-    /* Echte Bilder/Piktogramme */
-    .icon-image{
+    /* Icons: kleiner + agentenmäßiger Badge */
+    .icon-badge{
       width: 100%;
-      max-width: 240px;
-      display: block;
+      max-width: 150px;
       margin: 0.9rem auto 0;
-      border-radius: 14px;
+      border-radius: 16px;
       border: 1px solid var(--border);
-      background: rgba(148,163,184,0.08);
+      background: rgba(2,6,23,0.35);
       padding: 0.75rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+    }
+    body.light .icon-badge{ background: rgba(148,163,184,0.15); }
+
+    .icon-badge img{
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
-    .section{
-      margin-top: 1rem;
-    }
+    /* In Listen (Fälle/Team/Spione) noch etwas kleiner */
+    .mini .icon-badge{ max-width: 120px; padding: 0.65rem; }
 
-    .section h2{
-      margin: 0.2rem 0 0.6rem;
-      font-size: clamp(1.15rem, 4vw, 1.5rem);
-    }
+    .section{ margin-top: 1rem; }
+    .section h2{ margin: 0.2rem 0 0.6rem; font-size: clamp(1.15rem, 4vw, 1.5rem); }
 
     .grid{
       display: grid;
       grid-template-columns: 1fr;
       gap: 1rem;
     }
+    @media (min-width: 720px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1024px){ .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-    @media (min-width: 720px){
-      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (min-width: 1024px){
-      .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-
-    .tagrow{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.6rem;
-    }
-
+    .tagrow{ display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.6rem; }
     .tag{
-      font-size: 0.85rem;
-      padding: 0.2rem 0.55rem;
+      font-size: 0.82rem;
+      padding: 0.18rem 0.5rem;
       border: 1px solid var(--border);
       border-radius: 999px;
       color: var(--muted);
-    }
-
-    .note{
-      margin-top: 0.75rem;
-      color: var(--muted);
-      font-size: 0.95rem;
+      background: rgba(148,163,184,0.05);
     }
 
     footer{
@@ -203,6 +212,13 @@
       color: var(--muted);
       font-size: 0.9rem;
       text-align: center;
+    }
+
+    @media (max-width: 480px){
+      header{ padding: 0.65rem 0.8rem; }
+      .logo{ font-size: 1.75rem; }
+      .pill{ font-size: 0.9rem; }
+      .icon-badge{ max-width: 135px; }
     }
   </style>
 </head>
@@ -229,50 +245,64 @@
   <main>
     <section class="hero">
       <div class="card">
-        <h2>🕵️‍♂️ Superdetektiv im Einsatz</h2>
+        <div class="stamp">CLASSIFIED</div>
+        <h2>🕵️‍♂️ Einsatzleitung</h2>
         <p class="lead">
           Ich bin <span class="accent">Agent Ampel</span>.
-          Gemeinsam mit meinem <strong>Detektivteam</strong> und meinen <strong>Spionen</strong> lösen wir jeden Fall –
+          Mit meinem <strong>Detektivteam</strong> und meinen <strong>Spionen</strong> lösen wir jeden Fall –
           von <strong>Fahrraddiebstahl</strong> bis zu <strong>mysteriös verschwundenen Strafzetteln</strong>.
         </p>
 
-        <img src="icons/detektiv.svg" alt="Detektiv Piktogramm" class="icon-image">
-
-        <p class="note">
-          Wir beobachten genau, denken scharf nach und geben niemals auf.
-          Jeder Fall verdient unsere volle Aufmerksamkeit.
-        </p>
+        <!-- OBEN: Team/Agenten-Bild -->
+        <div class="icon-badge">
+          <img src="icons/hq-team.svg" alt="Geheimagenten-Team" />
+        </div>
       </div>
 
       <div class="card">
+        <div class="stamp">GEAR</div>
         <h2>🔎 Ausrüstung</h2>
         <p>Lupe, Notizbuch, Geheimkarte — und ganz viel Köpfchen!</p>
-        <img src="icons/lupe.svg" alt="Lupe Piktogramm" class="icon-image">
+        <div class="icon-badge">
+          <img src="icons/lupe.svg" alt="Lupe" />
+        </div>
       </div>
     </section>
 
     <section id="faelle" class="section">
       <h2>🗂️ Fälle</h2>
-      <div class="grid">
+      <div class="grid mini">
         <div class="card">
+          <div class="stamp">CASE</div>
           <h3>🚲 Operation Fahrrad-Finder</h3>
           <p>Ein Fahrrad ist weg! Wir sammeln Hinweise, fragen Zeugen und verfolgen Spuren.</p>
+          <div class="icon-badge">
+            <img src="icons/fahrrad.svg" alt="Fahrrad" />
+          </div>
           <div class="tagrow">
             <span class="tag">Hinweise</span><span class="tag">Zeugen</span><span class="tag">Spuren</span>
           </div>
         </div>
 
         <div class="card">
+          <div class="stamp">CASE</div>
           <h3>🧾 Die verschwundenen Strafzettel</h3>
           <p>Plötzlich sind die Zettel weg. War es Wind, Magie oder ein Trick?</p>
+          <div class="icon-badge">
+            <img src="icons/strafzettel.svg" alt="Strafzettel" />
+          </div>
           <div class="tagrow">
             <span class="tag">Rätsel</span><span class="tag">Logik</span><span class="tag">Akte</span>
           </div>
         </div>
 
         <div class="card">
+          <div class="stamp">CASE</div>
           <h3>🍪 Keks-Krise im Hauptquartier</h3>
           <p>Wer hat die Kekse genascht? Wir prüfen Alibis und suchen Krümel-Beweise.</p>
+          <div class="icon-badge">
+            <img src="icons/keks.svg" alt="Keks" />
+          </div>
           <div class="tagrow">
             <span class="tag">Alibi</span><span class="tag">Krümelspur</span><span class="tag">Verdächtig</span>
           </div>
@@ -282,42 +312,60 @@
 
     <section id="team" class="section">
       <h2>🧑‍🤝‍🧑 Detektivteam</h2>
-      <div class="grid">
+      <div class="grid mini">
         <div class="card">
+          <div class="stamp">ALLY</div>
           <h3>„Code-Katze“ 🐾</h3>
           <p>Spezialgebiet: Muster erkennen & lautlos schleichen.</p>
-          <img src="icons/team.svg" alt="Team Piktogramm" class="icon-image">
+          <div class="icon-badge">
+            <img src="icons/katze.svg" alt="Katze" />
+          </div>
         </div>
         <div class="card">
+          <div class="stamp">ALLY</div>
           <h3>„Professor Lupe“ 🔍</h3>
           <p>Spezialgebiet: Beweise sortieren & Notizen führen.</p>
-          <img src="icons/team.svg" alt="Team Piktogramm" class="icon-image">
+          <div class="icon-badge">
+            <img src="icons/akte.svg" alt="Akte" />
+          </div>
         </div>
         <div class="card">
+          <div class="stamp">ALLY</div>
           <h3>„Turbo-Tipp“ ⚡</h3>
           <p>Spezialgebiet: Schnelle Ideen & clevere Abkürzungen.</p>
-          <img src="icons/team.svg" alt="Team Piktogramm" class="icon-image">
+          <div class="icon-badge">
+            <img src="icons/blitz.svg" alt="Blitz" />
+          </div>
         </div>
       </div>
     </section>
 
     <section id="spione" class="section">
       <h2>🛰️ Spione</h2>
-      <div class="grid">
+      <div class="grid mini">
         <div class="card">
+          <div class="stamp">SPY</div>
           <h3>„Nebelblick“ 🌫️</h3>
           <p>Unauffällig schauen, ohne aufzufallen.</p>
-          <img src="icons/spion.svg" alt="Spion Piktogramm" class="icon-image">
+          <div class="icon-badge">
+            <img src="icons/nebel.svg" alt="Nebel" />
+          </div>
         </div>
         <div class="card">
+          <div class="stamp">SPY</div>
           <h3>„Flüsterfunk“ 📡</h3>
           <p>Schickt geheime Nachrichten (nur harmlose!).</p>
-          <img src="icons/spion.svg" alt="Spion Piktogramm" class="icon-image">
+          <div class="icon-badge">
+            <img src="icons/funk.svg" alt="Funk" />
+          </div>
         </div>
         <div class="card">
+          <div class="stamp">SPY</div>
           <h3>„Schuhabdruck“ 👟</h3>
           <p>Findet Spuren am Boden und zeigt die Richtung.</p>
-          <img src="icons/spion.svg" alt="Spion Piktogramm" class="icon-image">
+          <div class="icon-badge">
+            <img src="icons/spur.svg" alt="Spur" />
+          </div>
         </div>
       </div>
     </section>
@@ -337,9 +385,9 @@
       localStorage.setItem('theme', theme);
     }
 
+    // Start IMMER im Darkmode (nur gespeicherte Wahl zählt)
     const saved = localStorage.getItem('theme');
-    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-    setTheme(saved || (prefersLight ? 'light' : 'dark'));
+    setTheme(saved || 'dark');
 
     btn.addEventListener('click', () => {
       const isLight = document.body.classList.contains('light');

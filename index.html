@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light">
+  <title>Detektivbüro Agent Ampel 🚦</title>
+  <meta name="description" content="Superdetektiv Agent Ampel löst mit Team und Spionen jeden Fall." />
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root{
+      color-scheme: dark;
+      --bg: #0f172a;
+      --panel: #020617;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #22c55e;
+      --border: #334155;
+    }
+
+    body.light{
+      color-scheme: light;
+      --bg: #f8fafc;
+      --panel: #e5e7eb;
+      --text: #0f172a;
+      --muted: #334155;
+      --accent: #16a34a;
+      --border: #94a3b8;
+    }
+
+    body{
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      cursor: url("cursor-lupe.svg") 28 28, auto;
+    }
+
+    /* Touch-Geräte: kein Mauszeiger */
+    @media (pointer: coarse){
+      body{ cursor: auto; }
+    }
+
+    a, button, input, textarea, label { cursor: inherit; color: inherit; }
+
+    header{
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .logo{
+      font-size: 2.25rem;
+      line-height: 1;
+    }
+
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 220px;
+    }
+
+    .brand h1{
+      margin: 0;
+      font-size: clamp(1.35rem, 4.5vw, 2rem);
+      letter-spacing: 0.2px;
+    }
+
+    .kicker{
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+
+    nav{
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .pill{
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: transparent;
+      font-size: 0.95rem;
+    }
+
+    .pill:hover{ border-color: var(--accent); }
+
+    .icon-btn{
+      margin-left: auto;
+      border: 1px solid var(--border);
+      background: transparent;
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      min-height: 44px;
+      min-width: 44px;
+      font-size: 1rem;
+    }
+
+    main{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .hero{
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 860px){
+      .hero{ grid-template-columns: 1.2fr 0.8fr; align-items: start; }
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .lead{
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .accent{ color: var(--accent); font-weight: 700; }
+
+    .img-placeholder{
+      width: 100%;
+      height: min(240px, 52vw);
+      border-radius: 14px;
+      border: 1px dashed var(--border);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      padding: 0.75rem;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          rgba(148,163,184,0.12),
+          rgba(148,163,184,0.12) 10px,
+          rgba(2,6,23,0.0) 10px,
+          rgba(2,6,23,0.0) 20px
+        );
+    }
+
+    .section{
+      margin-top: 1rem;
+    }
+
+    .section h2{
+      margin: 0.2rem 0 0.6rem;
+      font-size: clamp(1.15rem, 4vw, 1.5rem);
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 720px){
+      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (min-width: 1024px){
+      .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .tagrow{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .tag{
+      font-size: 0.85rem;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+    }
+
+    .note{
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer{
+      margin: 2rem 0 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">🚦</div>
+      <div>
+        <div class="kicker">Detektivbüro</div>
+        <h1>Agent Ampel</h1>
+      </div>
+    </div>
+
+    <nav>
+      <a class="pill" href="#faelle">Fälle</a>
+      <a class="pill" href="#team">Team</a>
+      <a class="pill" href="#spione">Spione</a>
+    </nav>
+
+    <button id="themeToggle" class="icon-btn" type="button" aria-label="Design umschalten">🌙</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="card">
+        <h2>🕵️‍♂️ Superdetektiv im Einsatz</h2>
+        <p class="lead">
+          Ich bin <span class="accent">Agent Ampel</span>.
+          Gemeinsam mit meinem <strong>Detektivteam</strong> und meinen <strong>Spionen</strong> lösen wir jeden Fall –
+          von <strong>Fahrraddiebstahl</strong> bis zu <strong>mysteriös verschwundenen Strafzetteln</strong>.
+        </p>
+
+        <div class="img-placeholder">
+          Platzhalter für anonymes KI-Bild<br>
+          (Comic-Detektiv, keine echte Person)
+        </div>
+
+        <p class="note">
+          Sicherheit: Bitte keine echten Namen, Adressen, Schulen oder Telefonnummern auf die Website schreiben.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>🔎 Ausrüstung</h2>
+        <p>Lupe, Notizbuch, Geheimkarte — und ganz viel Köpfchen!</p>
+        <div class="img-placeholder">
+          Platzhalter: KI-Bild „Detektiv-Ausrüstung“
+        </div>
+      </div>
+    </section>
+
+    <section id="faelle" class="section">
+      <h2>🗂️ Fälle</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>🚲 Operation Fahrrad-Finder</h3>
+          <p>Ein Fahrrad ist weg! Wir sammeln Hinweise, fragen Zeugen und verfolgen Spuren.</p>
+          <div class="tagrow">
+            <span class="tag">Hinweise</span><span class="tag">Zeugen</span><span class="tag">Spuren</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🧾 Die verschwundenen Strafzettel</h3>
+          <p>Plötzlich sind die Zettel weg. War es Wind, Magie oder ein Trick?</p>
+          <div class="tagrow">
+            <span class="tag">Rätsel</span><span class="tag">Logik</span><span class="tag">Akte</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🍪 Keks-Krise im Hauptquartier</h3>
+          <p>Wer hat die Kekse genascht? Wir prüfen Alibis und suchen Krümel-Beweise.</p>
+          <div class="tagrow">
+            <span class="tag">Alibi</span><span class="tag">Krümelspur</span><span class="tag">Verdächtig</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="section">
+      <h2>🧑‍🤝‍🧑 Detektivteam</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>„Code-Katze“ 🐾</h3>
+          <p>Spezialgebiet: Muster erkennen & lautlos schleichen.</p>
+          <div class="img-placeholder">Platzhalter: anonymes KI-Teammitglied</div>
+        </div>
+        <div class="card">
+          <h3>„Professor Lupe“ 🔍</h3>
+          <p>Spezialgebiet: Beweise sortieren & Notizen führen.</p>
+          <div class="img-placeholder">Platzhalter: anonymes KI-Teammitglied</div>
+        </div>
+        <div class="card">
+          <h3>„Turbo-Tipp“ ⚡</h3>
+          <p>Spezialgebiet: Schnelle Ideen & clevere Abkürzungen.</p>
+          <div class="img-placeholder">Platzhalter: anonymes KI-Teammitglied</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="spione" class="section">
+      <h2>🛰️ Spione</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>„Nebelblick“ 🌫️</h3>
+          <p>Unauffällig schauen, ohne aufzufallen.</p>
+        </div>
+        <div class="card">
+          <h3>„Flüsterfunk“ 📡</h3>
+          <p>Schickt geheime Nachrichten (nur harmlose!).</p>
+        </div>
+        <div class="card">
+          <h3>„Schuhabdruck“ 👟</h3>
+          <p>Findet Spuren am Boden und zeigt die Richtung.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © Detektivbüro Agent Ampel 🚦 — Alles streng geheim.
+    </footer>
+  </main>
+
+  <script>
+    const btn = document.getElementById('themeToggle');
+
+    function setTheme(theme){
+      document.body.classList.toggle('light', theme === 'light');
+      btn.textContent = theme === 'light' ? '☀️' : '🌙';
+      document.documentElement.style.colorScheme = theme;
+      localStorage.setItem('theme', theme);
+    }
+
+    const saved = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    setTheme(saved || (prefersLight ? 'light' : 'dark'));
+
+    btn.addEventListener('click', () => {
+      const isLight = document.body.classList.contains('light');
+      setTheme(isLight ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

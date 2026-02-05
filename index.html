@@ -543,19 +543,47 @@
       setTheme(isLight ? 'dark' : 'light');
     });
   </script>
-    <script>
-    window.addEventListener('load', () => {
-      const loader = document.getElementById('loader');
-      const LOADER_TIME = 2800;
+  <script>
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    const LOADER_TIME = 2800;
+
+    /* ===== Schrittgeräusch (ohne Datei) ===== */
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const ctx = new AudioContext();
+
+    function playStep(){
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(220, ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.18);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.2);
+    }
+
+    const stepInterval = setInterval(playStep, 420);
+
+    /* ===== Loader ausblenden ===== */
+    setTimeout(() => {
+      loader.classList.add('fade-out');
+
+      clearInterval(stepInterval);
+      ctx.close();
 
       setTimeout(() => {
-        loader.classList.add('fade-out');
-
-        setTimeout(() => {
-          loader.remove();
-        }, 900);
-      }, LOADER_TIME);
-    });
-  </script>
+        loader.remove();
+      }, 900);
+    }, LOADER_TIME);
+  });
+</script>
 </body>
 </html>

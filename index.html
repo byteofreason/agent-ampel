@@ -227,10 +227,78 @@
       .mini .icon-badge{ max-width: 165px; }
       .hero-team{ max-width: 100%; }
     }
+    /* =======================
+   LADEBILDSCHIRM
+======================= */
+#loader{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(
+      1200px 600px at 20% 0%,
+      rgba(34,197,94,0.12),
+      transparent 60%
+    ),
+    var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  overflow: hidden;
+}
+
+/* Fußspuren */
+.tracks{
+  font-size: 3rem;
+  white-space: nowrap;
+  animation: footprints 2.8s linear infinite;
+  opacity: 0.9;
+}
+
+/* Text */
+.loader-text{
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+/* Animation */
+@keyframes footprints{
+  0%{
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  10%{
+    opacity: 1;
+  }
+  100%{
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+/* Sanftes Ausblenden */
+#loader.fade-out{
+  animation: loaderFade 0.8s ease forwards;
+}
+
+@keyframes loaderFade{
+  to{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
   </style>
 </head>
 
 <body>
+  <div id="loader">
+  <div class="tracks">
+    👣 👣 👣 👣 👣 👣 👣 👣
+  </div>
+  <div class="loader-text">Fall wird vorbereitet …</div>
+</div>
   <header>
     <div class="brand">
       <div class="logo" aria-hidden="true">🚦</div>
@@ -473,6 +541,20 @@
     btn.addEventListener('click', () => {
       const isLight = document.body.classList.contains('light');
       setTheme(isLight ? 'dark' : 'light');
+    });
+  </script>
+    <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      const LOADER_TIME = 2800;
+
+      setTimeout(() => {
+        loader.classList.add('fade-out');
+
+        setTimeout(() => {
+          loader.remove();
+        }, 900);
+      }, LOADER_TIME);
     });
   </script>
 </body>

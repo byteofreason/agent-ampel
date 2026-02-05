@@ -585,5 +585,42 @@
     }, LOADER_TIME);
   });
 </script>
+  <script>
+  // Einmal AudioContext erstellen
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  const clickCtx = new AudioContext();
+
+  function playDetectiveClick(){
+    if (clickCtx.state === 'suspended') {
+      clickCtx.resume();
+    }
+
+    const osc = clickCtx.createOscillator();
+    const gain = clickCtx.createGain();
+
+    // "Gadget / Lupe"-Sound
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(1200, clickCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(600, clickCtx.currentTime + 0.06);
+
+    gain.gain.setValueAtTime(0.0001, clickCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.12, clickCtx.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, clickCtx.currentTime + 0.08);
+
+    osc.connect(gain);
+    gain.connect(clickCtx.destination);
+
+    osc.start();
+    osc.stop(clickCtx.currentTime + 0.09);
+  }
+
+  // Klick auf ALLES
+  document.addEventListener('pointerdown', (e) => {
+    // Optional: nur bei Buttons & Links
+    // if (!e.target.closest('button, a')) return;
+
+    playDetectiveClick();
+  });
+</script>
 </body>
 </html>

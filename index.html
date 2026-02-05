@@ -165,16 +165,16 @@
     .accent{ color: var(--accent); font-weight: 800; }
 
     /* Icons: kleiner + agentenmäßiger Badge */
-    .icon-badge{
-      width: 100%;
-      max-width: 150px;
-      margin: 0.9rem auto 0;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: rgba(2,6,23,0.35);
-      padding: 0.75rem;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.28);
-    }
+    ..icon-badge{
+  width: 100%;
+  max-width: 220px;   /* ← größer */
+  margin: 1rem auto 0;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(2,6,23,0.35);
+  padding: 0.9rem;    /* etwas mehr Luft */
+  box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+}
     body.light .icon-badge{ background: rgba(148,163,184,0.15); }
 
     .icon-badge img{

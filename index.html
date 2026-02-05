@@ -111,14 +111,12 @@
       padding: 1rem;
     }
 
+    /* HERO: jetzt immer untereinander (Ausrüstung unter Team) */
     .hero{
       display: grid;
-      gap: 1rem;
+      gap: 1.25rem;
       grid-template-columns: 1fr;
       margin-top: 1rem;
-    }
-    @media (min-width: 860px){
-      .hero{ grid-template-columns: 1.2fr 0.8fr; align-items: start; }
     }
 
     .card{
@@ -164,27 +162,34 @@
     }
     .accent{ color: var(--accent); font-weight: 800; }
 
-    /* Icons: kleiner + agentenmäßiger Badge */
+    /* Icons: generell größer */
     .icon-badge{
-  width: 100%;
-  max-width: 260px;   /* ← größer */
-  margin: 1.2rem auto 0;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: rgba(2,6,23,0.35);
-  padding: 1rem;    /* etwas mehr Luft */
-  box-shadow: 0 18px 40px rgba(0,0,0,0.28);
-}
+      width: 100%;
+      max-width: 260px;
+      margin: 1rem auto 0;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: rgba(2,6,23,0.35);
+      padding: 1rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+    }
     body.light .icon-badge{ background: rgba(148,163,184,0.15); }
 
     .icon-badge img{
       width: 100%;
       height: auto;
       display: block;
+      border-radius: 14px;
     }
 
-    /* In Listen (Fälle/Team/Spione) noch etwas kleiner */
-    .mini .icon-badge{ max-width: 120px; padding: 0.65rem; }
+    /* Detektivteam am Anfang VIEL größer */
+    .hero-team{
+      max-width: 520px;
+      padding: 1.15rem;
+    }
+
+    /* In Listen (Fälle/Team/Spione) jetzt auch etwas größer als vorher */
+    .mini .icon-badge{ max-width: 180px; padding: 0.85rem; }
 
     .section{ margin-top: 1rem; }
     .section h2{ margin: 0.2rem 0 0.6rem; font-size: clamp(1.15rem, 4vw, 1.5rem); }
@@ -218,7 +223,9 @@
       header{ padding: 0.65rem 0.8rem; }
       .logo{ font-size: 1.75rem; }
       .pill{ font-size: 0.9rem; }
-      .icon-badge{ max-width: 135px; }
+      .icon-badge{ max-width: 220px; }
+      .mini .icon-badge{ max-width: 165px; }
+      .hero-team{ max-width: 100%; }
     }
   </style>
 </head>
@@ -253,12 +260,13 @@
           von <strong>Fahrraddiebstahl</strong> bis zu <strong>mysteriös verschwundenen Strafzetteln</strong>.
         </p>
 
-        <!-- OBEN: Team/Agenten-Bild -->
-        <div class="icon-badge">
+        <!-- OBEN: Team/Agenten-Bild (sehr groß) -->
+        <div class="icon-badge hero-team">
           <img src="icons/ChatGPT%20Image%205.%20Feb.%202026,%2002_08_10.png" alt="Geheimagenten-Team" />
         </div>
       </div>
 
+      <!-- Ausrüstung jetzt darunter -->
       <div class="card">
         <div class="stamp">GEAR</div>
         <h2>🔎 Ausrüstung</h2>
@@ -277,7 +285,7 @@
           <h3>🚲 Operation Fahrrad-Finder</h3>
           <p>Ein Fahrrad ist weg! Wir sammeln Hinweise, fragen Zeugen und verfolgen Spuren.</p>
           <div class="icon-badge">
-          <img src="icons/ChatGPT%20Image%205.%20Feb.%202026,%2001_59_21.png" alt="Verschwundenes Fahrrad" />
+            <img src="icons/ChatGPT%20Image%205.%20Feb.%202026,%2001_59_21.png" alt="Verschwundenes Fahrrad" />
           </div>
           <div class="tagrow">
             <span class="tag">Hinweise</span><span class="tag">Zeugen</span><span class="tag">Spuren</span>
@@ -289,7 +297,7 @@
           <h3>🧾 Die verschwundenen Strafzettel</h3>
           <p>Plötzlich sind die Zettel weg. War es Wind, Magie oder ein Trick?</p>
           <div class="icon-badge">
-          <img src="icons/ChatGPT%20Image%205.%20Feb.%202026,%2002_03_12.png" alt="Strafzettel" />
+            <img src="icons/ChatGPT%20Image%205.%20Feb.%202026,%2002_03_12.png" alt="Strafzettel" />
           </div>
           <div class="tagrow">
             <span class="tag">Rätsel</span><span class="tag">Logik</span><span class="tag">Akte</span>
@@ -301,7 +309,7 @@
           <h3>🍪 Keks-Krise im Hauptquartier</h3>
           <p>Wer hat die Kekse genascht? Wir prüfen Alibis und suchen Krümel-Beweise.</p>
           <div class="icon-badge">
-          <img src="icons/ChatGPT%20Image%205.%20Feb.%202026,%2002_05_39.png" alt="Kekse" />
+            <img src="icons/ChatGPT%20Image%205.%20Feb.%202026,%2002_05_39.png" alt="Kekse" />
           </div>
           <div class="tagrow">
             <span class="tag">Alibi</span><span class="tag">Krümelspur</span><span class="tag">Verdächtig</span>
